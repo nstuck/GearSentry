@@ -114,6 +114,7 @@ local function BuildPanel()
     AddHeader(L["OPTIONS_SECTION_ALERTS"])
     RegisterCheckbox("tooltipLine", L["OPTIONS_TOOLTIP_LINE"], L["OPTIONS_TOOLTIP_LINE_DESC"], true)
     RegisterCheckbox("bagArrows", L["OPTIONS_BAG_ARROWS"], L["OPTIONS_BAG_ARROWS_DESC"], true)
+    RegisterCheckbox("questRewardArrow", L["OPTIONS_QUEST_REWARD_ARROW"], L["OPTIONS_QUEST_REWARD_ARROW_DESC"], true)
     RegisterCheckbox("alertSound", L["OPTIONS_ALERT_SOUND"], L["OPTIONS_ALERT_SOUND_DESC"], true)
     RegisterCheckbox("alertAtLogin", L["OPTIONS_ALERT_AT_LOGIN"], L["OPTIONS_ALERT_AT_LOGIN_DESC"], true)
     if layout and type(CreateSettingsButtonInitializer) == "function" then

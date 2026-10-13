@@ -115,6 +115,9 @@ local DEFAULT_SETTINGS = {
     tooltipLine = true,
     -- The bag-slot arrow is on by default; `/gs arrows` toggles it.
     bagArrows = true,
+    -- The quest-turn-in reward arrow is on by default; `/gs questarrows`
+    -- toggles it.
+    questRewardArrow = true,
     -- The pop-up itself can't be turned off (it's the core feature), only its
     -- chime.
     alertSound = true,
@@ -349,6 +352,19 @@ ns.slashCommands["arrows"] = function()
     end
 end
 
+-- Toggles the arrow QuestArrows.lua draws on the quest turn-in reward
+-- panel. Like "arrows" above, the module itself listens for the setting
+-- change to repaint/hide right away.
+ns.slashCommands["questarrows"] = function()
+    local settings = ns.DB().settings
+    ns.SetSetting("questRewardArrow", not settings.questRewardArrow)
+    if settings.questRewardArrow then
+        ns:Print(L["QUEST_REWARD_ARROW_ON"])
+    else
+        ns:Print(L["QUEST_REWARD_ARROW_OFF"])
+    end
+end
+
 ns.slashCommands["scan"] = function()
     if ns.Scanner and ns.Scanner.ScanNow then
         ns.Scanner.ScanNow()
@@ -358,7 +374,7 @@ ns.slashCommands["scan"] = function()
 end
 
 -- The packaged TOC carries the git tag (the packager replaces
--- v0.3.1); an unpackaged development copy still has the
+-- v0.4.0); an unpackaged development copy still has the
 -- placeholder, so call that "dev" instead of printing the raw token.
 function ns.Version()
     local get = C_AddOns and C_AddOns.GetAddOnMetadata
@@ -381,6 +397,7 @@ ns.helpLines = {
     "HELP_ARMORFILTER",
     "HELP_TOOLTIP",
     "HELP_ARROWS",
+    "HELP_QUESTARROWS",
     "HELP_ALERTS",
     "HELP_UNIGNORE",
     "HELP_EQUIP",

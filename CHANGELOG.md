@@ -1,5 +1,10 @@
 # GearSentry
 
+## v0.4.0
+
+- **Quest reward arrow**: when a quest turn-in lets you choose between items, GearSentry now shows the same green upgrade arrow as your bags on whichever choice is the best upgrade. Ties between two equally-good choices favor a weapon type you already know. Toggle with "Quest reward upgrade arrow" in the options, or `/gs questarrows`.
+- Fixed: shield, ring and off-hand weapon upgrades could be silently skipped when the other item in the pair (a strong main-hand weapon, say) was scoring much higher. The minimum-gain-percent check now judges the slot you're actually upgrading on its own, not diluted by its partner.
+
 ## v0.3.1
 
 - GearSentry is now open source under the MIT license. The source of every release is on GitHub: [nstuck/GearSentry](https://github.com/nstuck/GearSentry).

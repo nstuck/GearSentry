@@ -195,15 +195,20 @@ local function isEquipped(item)
     return item.key and item.key:sub(1, 6) == "equip:"
 end
 
-local function passesThreshold(before, after, settings)
-    local gain = after - before
+-- `gain` is the group's total score change; `replacedBefore` is the combined
+-- "before" score of only the slot(s) whose item actually changes. Using the
+-- replaced slot's own score (not the whole pair/loadout) keeps minGainPct
+-- meaningful when one slot (e.g. a main-hand weapon) scores far higher than
+-- the other (e.g. a shield): a small off-hand upgrade should clear the
+-- threshold on its own merit, not get diluted by an unrelated big number.
+local function passesThreshold(gain, replacedBefore, settings)
     if gain <= EPSILON then
         return false
     end
     if gain < setting(settings, "minGain") then
         return false
     end
-    if before > EPSILON and gain / before * 100 < setting(settings, "minGainPct") then
+    if replacedBefore > EPSILON and gain / replacedBefore * 100 < setting(settings, "minGainPct") then
         return false
     end
     return true
@@ -282,7 +287,7 @@ local function resolveSingle(slot, candidates, equipped, ctx)
         end
     end
     local before = score(current, role)
-    if not best or not passesThreshold(before, bestScore, ctx.settings) then
+    if not best or not passesThreshold(bestScore - before, before, ctx.settings) then
         return nil
     end
     return makeSuggestion("single", { { item = best, slot = slot } }, { current }, before, bestScore, basis)
@@ -368,7 +373,16 @@ local function resolvePair(slots, candidates, equipped, ctx)
         end
     end
 
-    if not best or not passesThreshold(before, bestScore, ctx.settings) then
+    if not best then
+        return nil
+    end
+    local replacedBefore = 0
+    for _, slot in ipairs(slots) do
+        if best[slot] ~= equipped[slot] then
+            replacedBefore = replacedBefore + score(equipped[slot])
+        end
+    end
+    if not passesThreshold(bestScore - before, replacedBefore, ctx.settings) then
         return nil
     end
     local actions, removed = {}, {}
@@ -474,7 +488,14 @@ local function resolveWeapons(candidates, equipped, ctx)
     if bestMH == curMH and bestOH == curOH then
         return nil
     end
-    if not passesThreshold(before, bestScore, ctx.settings) then
+    local replacedBefore = 0
+    if bestMH ~= curMH then
+        replacedBefore = replacedBefore + score(curMH, "mainhand")
+    end
+    if bestOH ~= curOH then
+        replacedBefore = replacedBefore + score(curOH, "offhand")
+    end
+    if not passesThreshold(bestScore - before, replacedBefore, ctx.settings) then
         return nil
     end
 

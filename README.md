@@ -56,6 +56,13 @@ bugs are intentional.
 - Works with the default Blizzard bags and with **BetterBags**. In BetterBags, open `/bb` and pick
   GearSentry as the "Upgrade Icon Provider".
 
+### Quest reward arrow
+
+- When a quest turn-in lets you choose between reward items, the same green arrow marks the one
+  that's the best upgrade - so you don't have to compare them yourself.
+- Only shown when at least one choice is a real upgrade; guaranteed rewards (the ones you get no
+  matter what) never get the arrow, since there's nothing to decide there.
+
 ### Smart comparisons
 
 - **Rings and trinkets:** compares against both equipped items and replaces the one where the
@@ -97,7 +104,7 @@ bugs are intentional.
 Open with `/gs options`, from **Options → AddOns → GearSentry**, or from the addon compartment
 button on the minimap.
 
-- Turn the tooltip line, bag arrows and pop-up sound on or off
+- Turn the tooltip line, bag arrows, quest reward arrow and pop-up sound on or off
 - Alert for upgrades already in your bags when you log in (on by default)
 - Include or skip Bind on Equip items
 - Only suggest your best armor type (off by default: stats win)
@@ -119,6 +126,7 @@ button on the minimap.
 | `/gs unignore` | Clear this character's ignored items |
 | `/gs tooltip` | Toggle the tooltip line |
 | `/gs arrows` | Toggle the bag arrows |
+| `/gs questarrows` | Toggle the quest turn-in reward arrow |
 | `/gs armorfilter` | Toggle "only my best armor type" |
 | `/gs debug` | Toggle debug output |
 
@@ -129,6 +137,8 @@ button on the minimap.
 These parts haven't been tested in every situation yet. If one goes wrong for you, a report helps
 a lot.
 
+- **Quest reward arrow:** new this release; only tested against the quest turn-in dialog itself,
+  not every quest type or reward layout.
 - **Ring, trinket and dual-wield swaps:** equipping into the second ring, trinket or off-hand slot,
   and moving your main hand to the off hand.
 - **Equip edge cases:** accepting or cancelling the Bind on Equip prompt from the pop-up, double

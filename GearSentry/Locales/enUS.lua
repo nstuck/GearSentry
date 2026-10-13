@@ -72,6 +72,11 @@ L["HELP_ARROWS"] = "/gs arrows - toggle the upgrade arrow on bag item buttons"
 L["BAG_ARROWS_ON"] = "Bag upgrade arrows enabled."
 L["BAG_ARROWS_OFF"] = "Bag upgrade arrows disabled."
 
+-- QuestArrows.lua: the quest turn-in reward arrow and its toggle command.
+L["HELP_QUESTARROWS"] = "/gs questarrows - toggle the upgrade arrow on quest turn-in reward choices"
+L["QUEST_REWARD_ARROW_ON"] = "Quest reward upgrade arrow enabled."
+L["QUEST_REWARD_ARROW_OFF"] = "Quest reward upgrade arrow disabled."
+
 -- BetterBags.lua: one-time hint telling the player to pick us in BetterBags'
 -- own "Upgrade Icon Provider" dropdown. %s is ns.ADDON_TITLE, so it renames
 -- itself with the addon.
@@ -117,6 +122,9 @@ L["OPTIONS_TOOLTIP_LINE"] = "Tooltip upgrade line"
 L["OPTIONS_TOOLTIP_LINE_DESC"] = "Show an \"Upgrade\" line on item tooltips."
 L["OPTIONS_BAG_ARROWS"] = "Bag upgrade arrows"
 L["OPTIONS_BAG_ARROWS_DESC"] = "Show an arrow on bag items that are upgrades."
+L["OPTIONS_QUEST_REWARD_ARROW"] = "Quest reward upgrade arrow"
+L["OPTIONS_QUEST_REWARD_ARROW_DESC"] = "When a quest turn-in lets you choose between rewards, "
+    .. "show an arrow on the one that's the best upgrade."
 
 L["OPTIONS_SECTION_UPGRADE"] = "What counts as an upgrade"
 L["OPTIONS_SUGGEST_BOE"] = "Suggest Bind-on-Equip items"
